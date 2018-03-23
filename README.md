@@ -15,10 +15,10 @@ curl -X POST \
      "jsonrpc": "2.0",
      "method": "magento.service_bus.remote.register",
      "params": {
-     "id": "test",
-     "url": "http://localhost:1337/"
-   }
-   }'
+         "id": "test",
+         "url": "http://localhost:1337/"
+       }
+     }'
 ```
    
 Once you have your endpoint registered every time you send order created message you will receive order created message and then order updated message with the status configured in the config.yml file in the field StatusToExport.
