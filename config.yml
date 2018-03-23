@@ -1,0 +1,16 @@
+status_to_export:
+  - status: "RECEIVED"
+    reason: "IMPORTED"
+  - status: "ONHOLD"
+    reason: "PENDINGREMORSETIME"
+  - status: "LOGISTICS"
+    reason: "READYTOSHIP"
+  - status: "LOGISTICSCOMPLETE"
+    reason: "FULLYSHIPPED"
+  - status: "COMPLETE"
+    reason: "FULLYSHIPPED"
+
+aggregates_to_export:
+  - "AGG1"
+  - "AGG2"
+  - "AGG3"
