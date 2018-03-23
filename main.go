@@ -12,6 +12,8 @@ import (
 	"github.com/magento-mcom/fake-api/api"
 	"github.com/magento-mcom/fake-api/api/handler"
 	"github.com/magento-mcom/fake-api/app"
+	"github.com/magento-mcom/fake-api/order"
+	"github.com/satori/go.uuid"
 	"gopkg.in/gin-gonic/gin.v1"
 	"gopkg.in/yaml.v2"
 )
@@ -37,9 +39,10 @@ func main() {
 
 	r := api.NewRegistry()
 	p := api.NewPublisher(r)
+	or := order.NewOrderRegistry()
 	mh := map[string]api.Handler{
 		"magento.service_bus.remote.register":              handler.NewRegisterHandler(r),
-		"magento.sales.order_management.create":            handler.NewCreateOrderHandler(p, config.StatusToExport),
+		"magento.sales.order_management.create":            handler.NewCreateOrderHandler(p, config.StatusToExport, or),
 		"magento.inventory.source_stock_management.update": handler.NewSourceUpdateHandler(p, config.AggregatesToExport),
 	}
 
@@ -76,6 +79,22 @@ func main() {
 
 		if err != nil {
 			respBody.Error = err.Error()
+		}
+
+		ctx.JSON(http.StatusOK, respBody)
+	})
+
+	router.POST("/order/:id", func(ctx *gin.Context) {
+		orderId := ctx.Param("id")
+
+		id, _ := uuid.NewV4()
+		respBody := api.Response{
+			ID:      id.String(),
+			JsonRpc: "2.0",
+		}
+
+		if !or.Exists(orderId) {
+			respBody.Error = fmt.Sprintf("Order with id %v not exists.", orderId)
 		}
 
 		ctx.JSON(http.StatusOK, respBody)
