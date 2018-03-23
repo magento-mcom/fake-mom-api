@@ -1,7 +1,7 @@
 FAKE API
 ========
 
-How to set run:
+How to run:
 
 ```go run main.go --config config.yml```
 
@@ -21,7 +21,7 @@ curl -X POST \
      }'
 ```
    
-Once you have your endpoint registered every time you send order created message you will receive order created message and then order updated message with the status configured in the config.yml file in the field StatusToExport.
+Once you have your endpoint registered every time you send magento.sales.order_management.create message you will receive magento.sales.order_management.created message and then magento.sales.order_management.updated messages with the status configured in the config.yml file in the field StatusToExport.
 
 Also if you send magento.inventory.source_stock_management.update you will receive as well a magento.inventory.aggregate_stock_management.updated messages to the aggregates configured in config.yml in the field AggregatesToExport.
 
