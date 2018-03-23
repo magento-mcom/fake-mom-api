@@ -7,7 +7,8 @@ How to set run:
 
 Register:
 
-```curl -X POST \
+```
+curl -X POST \
      http://localhost:24213 \
      -d '{
      "id": "1",
