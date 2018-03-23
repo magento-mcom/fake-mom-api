@@ -3,8 +3,8 @@ package handler
 import (
 	"encoding/json"
 
-	"github.com/magento-mcom/fake-api/api"
-	"github.com/magento-mcom/fake-api/order"
+	"github.com/magento-mcom/fake-mom-api/api"
+	"github.com/magento-mcom/fake-mom-api/order"
 	"github.com/satori/go.uuid"
 )
 

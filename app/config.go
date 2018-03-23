@@ -1,6 +1,6 @@
 package app
 
-import "github.com/magento-mcom/fake-api/api/handler"
+import "github.com/magento-mcom/fake-mom-api/api/handler"
 
 type Config struct {
 	StatusToExport     []handler.OrderStatus `yaml:"status_to_export"`
