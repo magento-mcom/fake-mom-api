@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -19,11 +18,7 @@ import (
 )
 
 func main() {
-	var configFile string
-	flag.StringVar(&configFile, "config", "", "Config file")
-	flag.Parse()
-
-	content, err := ioutil.ReadFile(configFile)
+	content, err := ioutil.ReadFile("config.yml")
 
 	if err != nil {
 		panic(fmt.Sprintf("Error reading config file: %v", err))

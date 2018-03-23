@@ -1,9 +1,16 @@
 FAKE API
 ========
 
-How to run:
+How to run in local:
 
 ```go run main.go --config config.yml```
+
+How to run in docker:
+
+```
+docker build -t fake-api .
+docker run -it --rm -p 24213:24213 --name fake-api fake-api
+```
 
 Register:
 
