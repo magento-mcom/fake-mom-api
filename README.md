@@ -1,5 +1,5 @@
-FAKE API
-========
+FAKE MAGENTO ORDER MANAGEMENT API
+=================================
 
 How to run in local:
 
@@ -8,11 +8,11 @@ How to run in local:
 How to run in docker:
 
 ```
-docker build -t fake-api .
-docker run -it --rm -p 24213:24213 --name fake-api fake-api
+make build
+make run
 ```
 
-Register:
+You can then register your integration with :
 
 ```
 curl -X POST \
