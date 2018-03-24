@@ -1,5 +1,10 @@
-FAKE MAGENTO ORDER MANAGEMENT API
+Fake Magento Order Management API
 =================================
+
+# Goal
+
+The goal of this project is to enable Magento Commerce developers to be able to work with an isolated test environement. There is no logic and all orders will be shipped
+upon arrival in the fake API.
 
 # Build
 
