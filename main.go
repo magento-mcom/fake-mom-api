@@ -15,6 +15,7 @@ import (
 	"github.com/satori/go.uuid"
 	"gopkg.in/gin-gonic/gin.v1"
 	"gopkg.in/yaml.v2"
+	"github.com/magento-mcom/fake-mom-api/consumer"
 )
 
 func main() {
@@ -35,11 +36,14 @@ func main() {
 	r := api.NewRegistry()
 	p := api.NewPublisher(r)
 	or := order.NewOrderRegistry()
+	q := consumer.NewConsumerQueue()
+	c := consumer.NewConsumer(q, p)
 	mh := map[string]api.Handler{
 		"magento.service_bus.remote.register":              handler.NewRegisterHandler(r),
-		"magento.sales.order_management.create":            handler.NewCreateOrderHandler(p, config.StatusToExport, or),
+		"magento.sales.order_management.create":            handler.NewCreateOrderHandler(q, config.StatusToExport, or),
 		"magento.inventory.source_stock_management.update": handler.NewSourceUpdateHandler(p, config.AggregatesToExport),
 	}
+
 
 	d := api.NewDispatcher(mh)
 
@@ -97,6 +101,8 @@ func main() {
 
 		ctx.JSON(http.StatusOK, respBody)
 	})
+
+	go c.Run()
 
 	srv := &http.Server{
 		ReadHeaderTimeout: 10 * time.Second,

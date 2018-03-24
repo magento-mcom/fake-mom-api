@@ -6,8 +6,7 @@ import (
 	"github.com/magento-mcom/fake-mom-api/api"
 	"github.com/magento-mcom/fake-mom-api/order"
 	"github.com/satori/go.uuid"
-	"time"
-	"fmt"
+	"github.com/magento-mcom/fake-mom-api/consumer"
 )
 
 type OrderStatus struct {
@@ -21,16 +20,16 @@ type CreateOrder struct {
 	}
 }
 
-func NewCreateOrderHandler(publisher api.Publisher, statusToExport []OrderStatus, registry order.Registry) api.Handler {
+func NewCreateOrderHandler(c *consumer.ConsumerQueue, statusToExport []OrderStatus, registry order.Registry) api.Handler {
 	return &createOrderHandler{
-		publisher:      publisher,
+		queue:          c,
 		statusToExport: statusToExport,
 		registry:       registry,
 	}
 }
 
 type createOrderHandler struct {
-	publisher      api.Publisher
+	queue          *consumer.ConsumerQueue
 	statusToExport []OrderStatus
 	registry       order.Registry
 }
@@ -53,15 +52,13 @@ func (h *createOrderHandler) sendOrderCreated(message *json.RawMessage) {
 		ID:     id.String(),
 		Client: "FAKE",
 	}
-	h.publisher.Publish(req)
+	h.queue.Push(req)
 }
 
 func (h *createOrderHandler) sendOrderUpdated(message *json.RawMessage) {
 	jsonMap := make(map[string]interface{})
 	json.Unmarshal(*message, &jsonMap)
 	for _, s := range h.statusToExport {
-		time.Sleep(10 * time.Second)
-		fmt.Printf("Order was updated to status %v and status reason %v", s.Status, s.Reason)
 		jsonMap["order"].(map[string]interface{})["status"] = s.Status
 		jsonMap["order"].(map[string]interface{})["status_reason"] = s.Reason
 		m, _ := json.Marshal(jsonMap)
@@ -74,6 +71,6 @@ func (h *createOrderHandler) sendOrderUpdated(message *json.RawMessage) {
 			Client: "FAKE",
 		}
 
-		h.publisher.Publish(req)
+		h.queue.Push(req)
 	}
 }
