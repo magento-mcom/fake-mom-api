@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"net/http"
 	"fmt"
-	"time"
 )
 
 func NewPublisher(registry Registry) Publisher {
@@ -31,7 +30,6 @@ func (p *publisher) Publish(request Request) {
 	buffer := bytes.NewBuffer(b)
 
 	for _, i := range integrations {
-		time.Sleep(10 * time.Second)
 		fmt.Printf("Publishing message with method %v to integration %v\n", request.Method, i.ID)
 		p.client.Post(i.Url, "application/json", buffer)
 	}

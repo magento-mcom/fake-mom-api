@@ -6,6 +6,8 @@ import (
 	"github.com/magento-mcom/fake-mom-api/api"
 	"github.com/magento-mcom/fake-mom-api/order"
 	"github.com/satori/go.uuid"
+	"time"
+	"fmt"
 )
 
 type OrderStatus struct {
@@ -58,6 +60,8 @@ func (h *createOrderHandler) sendOrderUpdated(message *json.RawMessage) {
 	jsonMap := make(map[string]interface{})
 	json.Unmarshal(*message, &jsonMap)
 	for _, s := range h.statusToExport {
+		time.Sleep(10 * time.Second)
+		fmt.Printf("Order was updated to status %v and status reason %v", s.Status, s.Reason)
 		jsonMap["order"].(map[string]interface{})["status"] = s.Status
 		jsonMap["order"].(map[string]interface{})["status_reason"] = s.Reason
 		m, _ := json.Marshal(jsonMap)
