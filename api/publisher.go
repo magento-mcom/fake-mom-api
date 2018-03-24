@@ -30,7 +30,7 @@ func (p *publisher) Publish(request Request) {
 	buffer := bytes.NewBuffer(b)
 
 	for _, i := range integrations {
-		fmt.Printf("Publishing message with method %v to integration %v\n", request.Method, i.ID)
+		fmt.Printf("Publishing message with method %v to integration %v[%v]\n", request.Method, i.ID, i.Url)
 		p.client.Post(i.Url, "application/json", buffer)
 	}
 }
