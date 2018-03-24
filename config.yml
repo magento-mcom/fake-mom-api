@@ -14,3 +14,5 @@ aggregates_to_export:
   - "AGG1"
   - "AGG2"
   - "AGG3"
+
+delay_between_messages: 10

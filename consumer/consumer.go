@@ -7,6 +7,12 @@ import (
 	"errors"
 )
 
+type Consumer struct {
+	queue *ConsumerQueue
+	publisher api.Publisher
+	delayBetweenMessages time.Duration
+}
+
 type ConsumerQueue struct{
 	requests []api.Request
 	lock sync.Mutex
@@ -34,10 +40,11 @@ func NewConsumerQueue() *ConsumerQueue {
 	}
 }
 
-func NewConsumer(queue *ConsumerQueue, publisher api.Publisher) *Consumer {
+func NewConsumer(queue *ConsumerQueue, publisher api.Publisher, delayBetweenMessages int) *Consumer {
 	return &Consumer{
 		queue:     queue,
 		publisher: publisher,
+		delayBetweenMessages: time.Duration(int64(delayBetweenMessages)),
 	}
 }
 
@@ -49,14 +56,10 @@ func (q *ConsumerQueue) Push (request api.Request) {
 	q.requests = append(q.requests, request)
 }
 
-type Consumer struct {
-	queue *ConsumerQueue
-	publisher api.Publisher
-}
 
 func (c *Consumer) Run () {
 	for {
-		time.Sleep(10 * time.Second)
+		time.Sleep(c.delayBetweenMessages * time.Second)
 		request, err := c.queue.Pop()
 		if err == nil {
 			c.publisher.Publish(request)

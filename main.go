@@ -37,7 +37,7 @@ func main() {
 	p := api.NewPublisher(r)
 	or := order.NewOrderRegistry()
 	q := consumer.NewConsumerQueue()
-	c := consumer.NewConsumer(q, p)
+	c := consumer.NewConsumer(q, p, config.DelayBetweenMessages)
 	mh := map[string]api.Handler{
 		"magento.service_bus.remote.register":              handler.NewRegisterHandler(r),
 		"magento.sales.order_management.create":            handler.NewCreateOrderHandler(q, config.StatusToExport, or),
