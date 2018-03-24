@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/pkg/errors"
+	"fmt"
 )
 
 func NewDispatcher(handlers map[string]Handler) Dispatcher {
@@ -23,6 +24,8 @@ func (d *dispatcher) Dispatch(message Request) (interface{}, error) {
 	if !ok {
 		return nil, errors.Errorf("Handler not found for method %v.", message.Method)
 	}
+
+	fmt.Printf("Received message with method %v\n", message.Method)
 
 	return h.Handle(message.Params)
 }

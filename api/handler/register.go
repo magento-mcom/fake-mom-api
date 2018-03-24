@@ -5,6 +5,7 @@ import (
 
 	"github.com/magento-mcom/fake-mom-api/api"
 	"github.com/pkg/errors"
+	"fmt"
 )
 
 func NewRegisterHandler(registry api.Registry) api.Handler {
@@ -30,6 +31,8 @@ func (h *registerHandler) Handle(m *json.RawMessage) (interface{}, error) {
 	}
 
 	h.registry.Add(i)
+
+	fmt.Printf("Integration %v is registered with callback url: %v\n", i.ID, i.Url)
 
 	return h.registry.GetAll(), nil
 }

@@ -43,7 +43,7 @@ func main() {
 
 	d := api.NewDispatcher(mh)
 
-	router.POST("/api", func(ctx *gin.Context) {
+	apiGatewayHandler := func(ctx *gin.Context) {
 		data := api.Request{}
 
 		b, err := ioutil.ReadAll(ctx.Request.Body)
@@ -77,9 +77,12 @@ func main() {
 		}
 
 		ctx.JSON(http.StatusOK, respBody)
-	})
+	}
 
-	router.POST("/order/:id", func(ctx *gin.Context) {
+	router.POST("/api/", apiGatewayHandler)
+	router.POST("/api/:mode/:endpoint", apiGatewayHandler)
+
+	router.GET("/order/:id", func(ctx *gin.Context) {
 		orderId := ctx.Param("id")
 
 		id, _ := uuid.NewV4()
