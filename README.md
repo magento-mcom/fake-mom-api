@@ -19,7 +19,7 @@ make build
 make run
 ```
 
-Connecting your Magento Commerce
+# Connecting your Magento Commerce
 
 First register your Magento Commerce:
 
