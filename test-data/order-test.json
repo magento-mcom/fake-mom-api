@@ -1,0 +1,162 @@
+{
+  "jsonrpc": "2.0",
+  "method": "magento.sales.order_management.create",
+  "params": {
+    "order": {
+      "id": "test-order",
+      "store": null,
+      "status": null,
+      "status_reason": null,
+      "ip": "172.16.20.162",
+      "language": "en_US",
+      "vat_country": null,
+      "origin": "FRONTEND",
+      "origin_date": "2018-03-24T02:56:07-07:00",
+      "customer_service_agent": null,
+      "customer": {
+        "id": "anonymous",
+        "type": "GUEST",
+        "segment": "B2C"
+      },
+      "addresses": [
+        {
+          "reference": "16",
+          "address_type": "customer",
+          "first_name": "oaeush",
+          "last_name": "osuth",
+          "address1": "aoeu",
+          "address2": "",
+          "city": "aoeuoeu",
+          "state": "AS",
+          "zip": "34567",
+          "country_code": "US",
+          "phone": "45678",
+          "email": "aoeus@saeuhostehuc.om"
+        },
+        {
+          "reference": "15",
+          "address_type": "customer",
+          "first_name": "oaeush",
+          "last_name": "osuth",
+          "address1": "aoeu",
+          "address2": "",
+          "city": "aoeuoeu",
+          "state": "AS",
+          "zip": "34567",
+          "country_code": "US",
+          "phone": "45678",
+          "email": "aoeus@saeuhostehuc.om"
+        }
+      ],
+      "payments": [
+        {
+          "reference": "8",
+          "currency": "USD",
+          "transactions": [
+            {
+              "payment_method": "ZEROPAY",
+              "payment_submethod": "ZEROPAY",
+              "amount": 128,
+              "gateway_information": {
+                "gateway_id": "OFFLINE",
+                "account": null,
+                "transaction_id": null,
+                "authorization_status": "AUTHORIZED",
+                "original_auth_request_id": null,
+                "payment_account_unique_id": null,
+                "payment_service_response": null,
+                "custom_attributes": [
+                  {
+                    "attribute_code": "mdc_gateway_processor",
+                    "value": "checkmo",
+                    "name": "mdc_gateway_processor"
+                  }
+                ]
+              },
+              "billing_address_reference": "16"
+            }
+          ]
+        }
+      ],
+      "lines": [
+        {
+          "id": "8",
+          "line_number": 1,
+          "product_type": "PHYSICAL",
+          "sku": "SimpleProduct5ab50ffb000092",
+          "product_name": "SimpleProduct5ab50ffb000092",
+          "parent_line_id": null,
+          "image_url": "",
+          "product_url": null,
+          "source_id": null,
+          "shipping_address_reference": "15",
+          "payment_reference": "8",
+          "amount": {
+            "net_amount": 123,
+            "gross_amount": 123,
+            "tax_amount": 0,
+            "tax_rate": 0,
+            "taxes": [
+              {
+                "type": "NO TAX",
+                "amount": 0,
+                "rate": 0
+              }
+            ],
+            "currency": "USD"
+          },
+          "status": null,
+          "promotions_info": {
+            "original_price": 123,
+            "promotions": [
+              {
+                "code": null,
+                "name": "Spend $50 or more - shipping is free!",
+                "discount": 0,
+                "percentage": 0
+              }
+            ]
+          },
+          "pre_order_street_date": null,
+          "source_location": null,
+          "pickup_location": null
+        },
+        {
+          "id": "SHIPPING",
+          "line_number": 2,
+          "product_type": "SHIPPING",
+          "sku": "STANDARD",
+          "product_name": "Shipping",
+          "parent_line_id": null,
+          "image_url": null,
+          "product_url": null,
+          "source_id": null,
+          "shipping_address_reference": "15",
+          "payment_reference": "8",
+          "amount": {
+            "net_amount": 5,
+            "gross_amount": 5,
+            "tax_amount": 0,
+            "tax_rate": 0,
+            "taxes": [
+              {
+                "type": "NO TAX",
+                "amount": 0,
+                "rate": 0
+              }
+            ],
+            "currency": "USD"
+          },
+          "status": null,
+          "promotions_info": {
+            "original_price": 5,
+            "promotions": []
+          },
+          "pre_order_street_date": null,
+          "source_location": null,
+          "pickup_location": null
+        }
+      ]
+    }
+  }
+}
