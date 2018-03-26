@@ -29,6 +29,10 @@ func (p *publisher) Publish(request Request) {
 	b, _ := json.Marshal(request)
 	buffer := bytes.NewBuffer(b)
 
+	if len(integrations) == 0 {
+		fmt.Printf("NO integration is registered, so NO message will be sent")
+	}
+
 	for _, i := range integrations {
 		fmt.Printf("Publishing message with method %v to integration %v[%v]\n", request.Method, i.ID, i.Url)
 		p.client.Post(i.Url, "application/json", buffer)
