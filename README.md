@@ -32,7 +32,10 @@ Done.
 
 # Behaviour of fake API
 
-Once you have your endpoint registered every time you send `magento.sales.order_management.create` message you will receive `magento.sales.order_management.created` message and then `magento.sales.order_management.updated` messages with the status configured in the config.yml file in the field StatusToExport.
+Once you have your endpoint registered every time you send `magento.sales.order_management.create` message you will receive:
+* `magento.sales.order_management.created`
+* `magento.sales.order_management.updated` messages with the status configured in the `config.yml` file in the field StatusToExport
+* `magento.logistics.fulfillment_management.customer_shipment_done`
 
 You can emulate the call from Magento Commerce to the Fake Magento Order Management API as such:
 
