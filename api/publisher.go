@@ -30,7 +30,7 @@ func (p *publisher) Publish(request Request) {
 	buffer := bytes.NewBuffer(b)
 
 	if len(integrations) == 0 {
-		fmt.Printf("NO integration is registered, so NO message will be sent")
+		fmt.Printf("NO integration is registered, so NO message will be sent\n")
 	}
 
 	for _, i := range integrations {
