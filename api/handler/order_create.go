@@ -17,11 +17,11 @@ type OrderStatus struct {
 }
 
 type CreateOrderLine struct {
-	Id string
-	LineNumber int
-	ProductName string
-	ProductType string
-	Sku string
+	Id string          `json:"id"`
+	LineNumber int     `json:"line_number"`
+	ProductName string `json:"product_name"`
+	ProductType string `json:"product_type"`
+	Sku string         `json:"sku"`
 }
 
 type CreateOrder struct {
@@ -33,43 +33,43 @@ type CreateOrder struct {
 }
 
 type CustomerShipmentDoneItem struct {
-	OrderLineId string `json:"order_line_id"`
+	OrderLineId string  `json:"order_line_id"`
 	OrderLineNumber int `json:"order_line_number"`
-	ItemType string `json:"item_type"`
-	Sku string `json:"sku"`
-	Name string `json:"name"`
+	ItemType string     `json:"item_type"`
+	Sku string          `json:"sku"`
+	Name string         `json:"name"`
 }
 
 type CustomerShipmentDonePackage struct {
-	ID string `json:"id"`
+	ID string   `json:"id"`
 	Items []int `json:"items"`
 }
 
 type CustomerShipmentDone struct {
 	Shipment struct{
-		ShipmentId string `json:"shimpent_id"`
-		StoreId string `json:"store_id"`
-		OrderId string `json:"order_id"`
-		SourceId string `json:"source_id"`
-		Method string `json:"method"`
-		ShipmentDate string `json:shipment_date`
-		Items []CustomerShipmentDoneItem
-		Packages []CustomerShipmentDonePackage
+		ShipmentId string                      `json:"shimpent_id"`
+		StoreId string                         `json:"store_id"`
+		OrderId string                         `json:"order_id"`
+		SourceId string                        `json:"source_id"`
+		Method string                          `json:"method"`
+		ShipmentDate string                    `json:"shipment_date"`
+		Items []CustomerShipmentDoneItem       `json:"items"`
+		Packages []CustomerShipmentDonePackage `json:"packages"`
 		Address struct{
-			Reference string `json:"reference"`
-			AddressType string `json:"address_type"'`
-			FirstName string `json:"first_name"`
-			LastName string `json:"last_name"`
-			Address1 string `json:"address1"`
-			Address2 string `json:"address2"`
-			City string `json:"city"`
-			State string `json:"state"`
-			Zip string `json:"zip"`
-			CountryCode string `json:"country_code"`
-			Phone string `json:"phone"`
-			Email string `json:"email"`
-		}
-	}
+			Reference string                   `json:"reference"`
+			AddressType string                 `json:"address_type"`
+			FirstName string                   `json:"first_name"`
+			LastName string                    `json:"last_name"`
+			Address1 string                    `json:"address1"`
+			Address2 string                    `json:"address2"`
+			City string                        `json:"city"`
+			State string                       `json:"state"`
+			Zip string                         `json:"zip"`
+			CountryCode string                 `json:"country_code"`
+			Phone string                       `json:"phone"`
+			Email string                       `json:"email"`
+		}                                      `json:"address"`
+	}                                          `json:"shipment"`
 }
 
 func NewCreateOrderHandler(c *consumer.ConsumerQueue, statusToExport []OrderStatus, registry order.Registry) api.Handler {

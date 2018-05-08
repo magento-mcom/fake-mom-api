@@ -6,7 +6,7 @@ type Request struct {
 	Params *json.RawMessage `json:"params"`
 	Method string           `json:"method"`
 	ID     interface{}      `json:"id"`
-	Client string
+	Client string           `json:"client"`
 }
 
 type Response struct {
