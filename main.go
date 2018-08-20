@@ -13,7 +13,7 @@ import (
 	"github.com/magento-mcom/fake-mom-api/app"
 	"github.com/magento-mcom/fake-mom-api/order"
 	"github.com/satori/go.uuid"
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
 	"github.com/magento-mcom/fake-mom-api/consumer"
 )
